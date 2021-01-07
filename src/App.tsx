@@ -7,25 +7,27 @@ import Header from "./components/common/Header";
 import Sidebar from "./components/common/Sidebar";
 import Top from "./components/top/Top";
 import Login from "./components/account/Login";
+import LabelView from "./components/label_view/LabelView";
 import logo from "./assets/images/logo.svg";
 import "./assets/styles/App.scss";
 
 function App() {
   return (
     <div className="App">
-      <Container className="p-0" fluid>
+      <Container className="p-0 bg-dark" fluid>
         <BrowserRouter>
           <Row>
             <Header />
           </Row>
           <Row>
-            <Col md={2}>
+            <Col md={1} className="p-0">
               <Sidebar />
             </Col>
             <Col>
               <Switch>
                 <Route exact={true} path={"/"} component={Top} />
                 <Route path={"/login"} component={Login} />
+                <Route path={"/label_view/:userID"} component={LabelView} />
               </Switch>
             </Col>
           </Row>
