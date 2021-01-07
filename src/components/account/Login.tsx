@@ -37,29 +37,31 @@ class Login extends React.Component<Props, State> {
 
   public loginStudent(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    const url = `${process.env.REACT_APP_API_URL}/api/login_student`;
-    const loginStudentInfo = {
-      student_id: this.state.userID,
-      password: this.state.password,
-    };
-    const method = "POST";
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    };
-    const body = JSON.stringify(loginStudentInfo);
-
-    fetch(url, { method, headers, body })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result.login_status);
-        if (result.login_status === "success") {
-          this.props.history.push(`/index/student/${this.state.userID}`);
-        } else {
-          this.setState({ loginStatus: result.login_status });
-        }
-      })
-      .catch(console.error);
+    // TODO: implement API connection
+    this.props.history.push(`/label_view/tester`);
+    // const url = `${process.env.REACT_APP_API_URL}/api/login_student`;
+    // const loginStudentInfo = {
+    //   student_id: this.state.userID,
+    //   password: this.state.password,
+    // };
+    // const method = "POST";
+    // const headers = {
+    //   Accept: "application/json",
+    //   "Content-Type": "application/json",
+    // };
+    // const body = JSON.stringify(loginStudentInfo);
+    //
+    // fetch(url, { method, headers, body })
+    //   .then((res) => res.json())
+    //   .then((result) => {
+    //     console.log(result.login_status);
+    //     if (result.login_status === "success") {
+    //       this.props.history.push(`/index/student/${this.state.userID}`);
+    //     } else {
+    //       this.setState({ loginStatus: result.login_status });
+    //     }
+    //   })
+    //   .catch(console.error);
   }
 
   public render() {
