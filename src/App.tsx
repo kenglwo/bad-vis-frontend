@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Header from "./components/common/Header";
-import Sidebar from "./components/common/Sidebar";
+// import Sidebar from "./components/common/Sidebar";
 import Top from "./components/top/Top";
 import Login from "./components/account/Login";
 import LabelView from "./components/label_view/LabelView";
@@ -20,10 +20,7 @@ function App() {
             <Header />
           </Row>
           <Row>
-            <Col md={1} className="p-0">
-              <Sidebar />
-            </Col>
-            <Col>
+            <Col className="ml-3">
               <Switch>
                 <Route exact={true} path={"/"} component={Top} />
                 <Route path={"/login"} component={Login} />
