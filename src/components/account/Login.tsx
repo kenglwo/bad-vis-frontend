@@ -66,29 +66,29 @@ class Login extends React.Component<Props, State> {
 
   public render() {
     return (
-      <div className="mt-5 mb-5 p-3">
+      <div className="text-white mt-5 mb-5 p-3">
         <h2 className="mb-5">Login</h2>
         <Form className="mt-4">
           <Form.Group as={Row} controlId="formUserAuthenticaiton">
             <Form.Label column md={4} className="font-weight-bold text-right">
-              User ID
+              Name
             </Form.Label>
             <Col md={4}>
               <Form.Control
                 type="text"
-                placeholder="Enter User ID"
+                placeholder="Enter Your Name"
                 onChange={this.onUserIDChanged}
               />
             </Col>
           </Form.Group>
           <Form.Group as={Row} controlId="formUserAuthenticaiton">
             <Form.Label column md={4} className="font-weight-bold text-right">
-              Password
+              Wechat/UST ID
             </Form.Label>
             <Col md={4}>
               <Form.Control
                 type="password"
-                placeholder="Enter Password"
+                placeholder="Enter Your Wechat/UST ID"
                 onChange={this.onPasswordChanged}
               />
             </Col>
