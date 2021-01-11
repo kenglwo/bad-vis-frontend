@@ -12,7 +12,6 @@ class TopBar extends React.Component<Props, State> {
   public render() {
     return (
       <div className="d-flex align-items-center bg-dark text-white p-2 w-100">
-        <span className="mr-3">Unlabeled</span>
         <Button
           variant="outline-secondary mr-3"
           onClick={this.props.onClickBackButton}
