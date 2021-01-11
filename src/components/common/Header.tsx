@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import IconButton from "@material-ui/core/IconButton";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import Drawer from "./Drawer";
 import logo from "../../assets/images/logo.svg";
 import "../../assets/styles/Header.scss";
 
@@ -30,15 +31,9 @@ class Header extends React.Component<Props, State> {
     return (
       <Navbar className="w-100 p-1" bg="dark" variant="dark" expand="lg">
         <Navbar.Brand href="#home">
-          <img
-            src={logo}
-            width="50"
-            height="50"
-            className="d-inline-block align-top ml-3"
-            alt="React"
-          />
+          <Drawer />
         </Navbar.Brand>
-        <Nav className="mr-4">
+        <Nav className="mr-auto">
           <Nav.Link id="home" href="/">
             <HomeRoundedIcon
               className="text-white font-weight-bold pointer"
@@ -46,10 +41,6 @@ class Header extends React.Component<Props, State> {
             />
           </Nav.Link>
         </Nav>
-        <Form inline className="mr-auto">
-          <FormControl type="text" placeholder="Search" className="mr-2" />
-          <Button variant="outline-info pointer">Search</Button>
-        </Form>
         <IconButton onClick={this.goToLoginPage}>
           <AccountBoxIcon
             className="pointer text-white mr-5"
