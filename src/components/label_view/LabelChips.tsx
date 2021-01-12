@@ -6,8 +6,11 @@ import Chip from "@material-ui/core/Chip";
 import { LabelOption } from "../../model/Label";
 
 interface Props {
+  labelCategory: string;
   labelCategoryName: string;
   labelOptions: LabelOption[];
+  selectedLabels: string[];
+  handleLabelClick: (e: React.MouseEvent<HTMLElement>) => void;
 }
 interface State {
   selectedLabels: string[];
@@ -21,7 +24,6 @@ class LabelChips extends React.Component<Props, State> {
       selectedLabels: [],
     };
 
-    this.handleClick = this.handleClick.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
@@ -29,38 +31,26 @@ class LabelChips extends React.Component<Props, State> {
     const labelName: string | null = e.currentTarget.getAttribute("data-item");
   }
 
-  public handleClick(e: React.MouseEvent<HTMLElement>) {
-    e.preventDefault();
-    const labelName: string | null = String(
-      e.currentTarget.getAttribute("data-item")
-    );
-    console.log(labelName);
-    this.setState((prevState: State) => {
-      let selectedLabels: string[] = prevState.selectedLabels;
-
-      if (selectedLabels.includes(labelName)) {
-        const index: number = selectedLabels.indexOf(labelName);
-        selectedLabels.splice(index, 1);
-      } else {
-        selectedLabels.push(labelName);
-      }
-
-      const newSelectedLabels = Array.from(new Set(selectedLabels));
-      return { selectedLabels: newSelectedLabels };
-    });
+  public componentDidUpdate(prevProps: Props) {
+    if (this.props.selectedLabels !== prevProps.selectedLabels) {
+      this.setState({ selectedLabels: this.props.selectedLabels });
+    }
   }
 
   public render() {
-    console.log(this.state.selectedLabels);
     const labelChips = this.props.labelOptions.map((d, i) => (
       <Chip
         key={i}
-        data-item={d.labelName}
+        data-item={`${this.props.labelCategory}:${d.labelName}`}
         label={d.labelName}
         clickable
-        onClick={this.handleClick}
+        onClick={this.props.handleLabelClick}
         className="m-1"
-        variant={"outlined"}
+        variant={
+          this.state.selectedLabels.includes(d.labelName)
+            ? "default"
+            : "outlined"
+        }
       />
     ));
     return (

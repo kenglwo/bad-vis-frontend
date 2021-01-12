@@ -35,3 +35,17 @@ export type LabelOption = {
   description: string;
   subcategoryName: string;
 };
+
+type LabelIndex =
+  | "issues"
+  | "chartTypes"
+  | "dataTypes"
+  | "domains"
+  | "medium"
+  | "layouts"
+  | "effects"
+  | "flags";
+
+export type SelectedLabels = {
+  [key: string]: string[];
+};

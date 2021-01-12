@@ -2,7 +2,12 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import LabelChips from "./LabelChips";
-import { LabelAPI, LabelCategory, LabelOption } from "../../model/Label";
+import {
+  LabelAPI,
+  LabelCategory,
+  LabelOption,
+  SelectedLabels,
+} from "../../model/Label";
 import "../../assets/styles/Header.scss";
 
 interface Props {}
@@ -15,6 +20,7 @@ interface State {
   layoutsLabels: LabelOption[];
   effectsLabels: LabelOption[];
   flagsLabels: LabelOption[];
+  selectedLabels: SelectedLabels;
 }
 
 class LabelSetPanel extends React.Component<Props, State> {
@@ -30,7 +36,79 @@ class LabelSetPanel extends React.Component<Props, State> {
       layoutsLabels: [],
       effectsLabels: [],
       flagsLabels: [],
+      selectedLabels: {
+        issues: [],
+        chartTypes: [],
+        dataTypes: [],
+        domains: [],
+        medium: [],
+        layouts: [],
+        effects: [],
+        flags: [],
+      },
     };
+
+    this.handleLabelClick = this.handleLabelClick.bind(this);
+  }
+
+  public keyMapping(labelName: string) {
+    let key = "";
+    switch (labelName) {
+      case "Issues":
+        key = "issues";
+        break;
+      case "Chart Types":
+        key = "chartTypes";
+        break;
+      case "Data Types":
+        key = "dataTypes";
+        break;
+      case "Domains":
+        key = "domains";
+        break;
+      case "Medium":
+        key = "medium";
+        break;
+      case "Layouts":
+        key = "layouts";
+        break;
+      case "Effects":
+        key = "effects";
+        break;
+      case "Flags":
+        key = "flags";
+        break;
+    }
+
+    return key;
+  }
+
+  public handleLabelClick(e: React.MouseEvent<HTMLElement>) {
+    e.preventDefault();
+    const labelData: string | null = String(
+      e.currentTarget.getAttribute("data-item")
+    );
+    const labelCategory: string = labelData.split(":")[0];
+    const labelName = labelData.split(":")[1];
+
+    this.setState((prevState: State) => {
+      let selectedLabels: string[] = prevState.selectedLabels[labelCategory];
+
+      if (selectedLabels.includes(labelName)) {
+        const index: number = selectedLabels.indexOf(labelName);
+        selectedLabels.splice(index, 1);
+      } else {
+        selectedLabels.push(labelName);
+      }
+      //
+      const newSelectedLabels = Array.from(new Set(selectedLabels));
+      return {
+        selectedLabels: {
+          ...prevState.selectedLabels,
+          [labelCategory]: newSelectedLabels,
+        },
+      };
+    });
   }
 
   public componentDidMount() {
@@ -58,9 +136,9 @@ class LabelSetPanel extends React.Component<Props, State> {
               // labelCategories["options"].push(labelOption);
               return labelOption;
             });
-            console.log("###################");
-            console.log(categoryName);
-            console.log(labels);
+            // console.log("###################");
+            // console.log(categoryName);
+            // console.log(labels);
 
             switch (categoryName) {
               case "Issues":
@@ -97,49 +175,66 @@ class LabelSetPanel extends React.Component<Props, State> {
   }
 
   public render() {
-    const labelGroupNames = [
-      "Issues",
-      "Chart Types",
-      "Data Types",
-      "Domains",
-      "Medium",
-      "Layouts",
-      "Effects",
-    ];
+    console.log(this.state.selectedLabels);
+    console.log(this.state.selectedLabels["issues"]);
     return (
       <Container className="mt-5">
-        <Row className="">
+        <Row>
           <LabelChips
+            labelCategory="issues"
             labelCategoryName="Issues"
             labelOptions={this.state.issueLabels}
+            selectedLabels={this.state.selectedLabels["issues"]}
+            handleLabelClick={this.handleLabelClick}
           />
           <LabelChips
+            labelCategory="chartTypes"
             labelCategoryName="Chart Types"
             labelOptions={this.state.chartTypesLabels}
+            selectedLabels={this.state.selectedLabels["chartTypes"]}
+            handleLabelClick={this.handleLabelClick}
           />
           <LabelChips
+            labelCategory="dataTypes"
             labelCategoryName="Data Types"
             labelOptions={this.state.dataTypesLabels}
+            selectedLabels={this.state.selectedLabels["dataTypes"]}
+            handleLabelClick={this.handleLabelClick}
           />
           <LabelChips
+            labelCategory="domains"
             labelCategoryName="Domains"
             labelOptions={this.state.domainsLabels}
+            selectedLabels={this.state.selectedLabels["domains"]}
+            handleLabelClick={this.handleLabelClick}
           />
           <LabelChips
+            labelCategory="medium"
             labelCategoryName="Medium"
             labelOptions={this.state.mediumLabels}
+            selectedLabels={this.state.selectedLabels["medium"]}
+            handleLabelClick={this.handleLabelClick}
           />
           <LabelChips
+            labelCategory="layouts"
             labelCategoryName="Layouts"
             labelOptions={this.state.layoutsLabels}
+            selectedLabels={this.state.selectedLabels["layouts"]}
+            handleLabelClick={this.handleLabelClick}
           />
           <LabelChips
+            labelCategory="effects"
             labelCategoryName="Effects"
             labelOptions={this.state.effectsLabels}
+            selectedLabels={this.state.selectedLabels["effects"]}
+            handleLabelClick={this.handleLabelClick}
           />
           <LabelChips
+            labelCategory="flags"
             labelCategoryName="Flags"
             labelOptions={this.state.flagsLabels}
+            selectedLabels={this.state.selectedLabels["flags"]}
+            handleLabelClick={this.handleLabelClick}
           />
         </Row>
       </Container>
