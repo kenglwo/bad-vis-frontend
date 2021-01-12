@@ -2,7 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import ChipsIssues from "./ChipsIssues";
-import ChipsChartTypes from "./ChipsChartTypes";
+import LabelChips from "./LabelChips";
 import ChipsDataTypes from "./ChipsDataTypes";
 import ChipsDomains from "./ChipsDomains";
 import ChipsMedium from "./ChipsMedium";
@@ -49,7 +49,7 @@ class LabelSetPanel extends React.Component<Props, State> {
             const categoryName: string = labelGroup["name"];
             const labels = labelGroup["options"].map((label) => {
               let labelOption = {
-                optionName: label["name"],
+                labelName: label["name"],
                 description: label.hasOwnProperty("description")
                   ? label["description"]
                   : "",
@@ -115,14 +115,38 @@ class LabelSetPanel extends React.Component<Props, State> {
     return (
       <Container className="mt-5">
         <Row className="">
-          <ChipsChartTypes />
-          <ChipsChartTypes />
-          <ChipsChartTypes />
-          <ChipsChartTypes />
-          <ChipsChartTypes />
-          <ChipsChartTypes />
-          <ChipsChartTypes />
-          <ChipsChartTypes />
+          <LabelChips
+            labelCategoryName="Issues"
+            labelOptions={this.state.issueLabels}
+          />
+          <LabelChips
+            labelCategoryName="Chart Types"
+            labelOptions={this.state.chartTypesLabels}
+          />
+          <LabelChips
+            labelCategoryName="Data Types"
+            labelOptions={this.state.dataTypesLabels}
+          />
+          <LabelChips
+            labelCategoryName="Domains"
+            labelOptions={this.state.domainsLabels}
+          />
+          <LabelChips
+            labelCategoryName="Medium"
+            labelOptions={this.state.mediumLabels}
+          />
+          <LabelChips
+            labelCategoryName="Layouts"
+            labelOptions={this.state.layoutsLabels}
+          />
+          <LabelChips
+            labelCategoryName="Effects"
+            labelOptions={this.state.effectsLabels}
+          />
+          <LabelChips
+            labelCategoryName="Flags"
+            labelOptions={this.state.flagsLabels}
+          />
         </Row>
       </Container>
     );

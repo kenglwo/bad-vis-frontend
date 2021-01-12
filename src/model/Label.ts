@@ -31,7 +31,7 @@ export type LabelCategory = {
 };
 
 export type LabelOption = {
-  optionName: string;
+  labelName: string;
   description: string;
   subcategoryName: string;
 };
