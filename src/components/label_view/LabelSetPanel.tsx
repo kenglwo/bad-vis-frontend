@@ -1,13 +1,7 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import ChipsIssues from "./ChipsIssues";
 import LabelChips from "./LabelChips";
-import ChipsDataTypes from "./ChipsDataTypes";
-import ChipsDomains from "./ChipsDomains";
-import ChipsMedium from "./ChipsMedium";
-import ChipsLayouts from "./ChipsLayouts";
-import ChipsEffects from "./ChipsEffects";
 import { LabelAPI, LabelCategory, LabelOption } from "../../model/Label";
 import "../../assets/styles/Header.scss";
 
